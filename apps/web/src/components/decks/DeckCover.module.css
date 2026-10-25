@@ -1,0 +1,76 @@
+.cover {
+  position: relative;
+  height: 128px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--deck-light);
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--deck-strong);
+}
+
+.circleBig {
+  width: 150px;
+  height: 150px;
+  right: -40px;
+  top: -60px;
+  opacity: 0.2;
+}
+
+.circleSmall {
+  width: 60px;
+  height: 60px;
+  left: 18px;
+  bottom: -22px;
+  opacity: 0.3;
+}
+
+.stack {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: calc(100% - 48px);
+  animation: float 5s ease-in-out infinite;
+}
+
+.sticker {
+  max-width: 100%;
+  padding: 10px 20px;
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-en);
+  font-size: 20px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: 0 10px 22px rgb(27 26 46 / 0.12);
+  transform: rotate(-5deg);
+}
+
+.caption {
+  max-width: 100%;
+  margin-top: -6px;
+  padding: 5px 12px;
+  border-radius: 9px;
+  background: var(--text);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transform: rotate(4deg) translateX(18px);
+}
+
+@keyframes float {
+  50% {
+    transform: translateY(-6px);
+  }
+}

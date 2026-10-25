@@ -1,0 +1,137 @@
+/* «Новая колода»: обложка будущей колоды во всю ширину окна */
+.cover {
+  margin: -28px -28px 22px;
+  border-radius: 24px 24px 0 0;
+}
+
+.coverBadge {
+  position: absolute;
+  left: 16px;
+  top: 14px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgb(255 255 255 / 0.75);
+  color: var(--deck-ink);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@media (max-width: 480px) {
+  .cover {
+    margin: -22px -18px 20px;
+  }
+}
+
+/* «Переименовать»: карандаш в квадрате цвета колоды */
+.badgeIcon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 16px;
+  border-radius: 16px;
+  background: var(--deck-light);
+  color: var(--deck-ink);
+}
+
+.renameLine {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 0;
+  font-size: 15px;
+}
+
+.oldName {
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.arrow {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.newName {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+/* «Удалить»: веер карточек цвета колоды и красный круг с корзиной */
+.fan {
+  position: relative;
+  width: 150px;
+  height: 104px;
+  margin: 4px auto 18px;
+}
+
+.fanCard {
+  position: absolute;
+  left: 40px;
+  top: 8px;
+  width: 70px;
+  height: 88px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--deck-light);
+  border: 2px solid var(--surface);
+  box-shadow: 0 8px 18px rgb(27 26 46 / 0.12);
+  color: var(--deck-ink);
+  font-family: var(--font-en);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.fanCard:nth-child(1) {
+  transform: rotate(-16deg) translateX(-26px);
+  opacity: 0.7;
+}
+
+.fanCard:nth-child(2) {
+  transform: rotate(-4deg) translateX(-8px);
+  opacity: 0.85;
+}
+
+.fanCard:nth-child(3) {
+  transform: rotate(10deg) translateX(14px);
+  background: var(--deck-strong);
+  color: #fff;
+}
+
+.trash {
+  position: absolute;
+  right: -6px;
+  bottom: -4px;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--surface);
+  border-radius: 50%;
+  background: var(--danger);
+  color: #fff;
+  animation: wobble 1.6s ease-in-out infinite;
+}
+
+.errorGap {
+  margin-top: 16px;
+}
+
+@keyframes wobble {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0);
+  }
+  70% {
+    transform: rotate(-12deg);
+  }
+  80% {
+    transform: rotate(10deg);
+  }
+  90% {
+    transform: rotate(-6deg);
+  }
+}

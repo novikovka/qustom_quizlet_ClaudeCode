@@ -1,0 +1,53 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 24px 36px;
+  text-align: center;
+  border: 2px dashed #cfcbe6;
+  border-radius: 22px;
+}
+
+.arrow {
+  color: var(--accent);
+  animation: bounce 1.4s ease-in-out infinite;
+}
+
+.cards {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.card {
+  width: 70px;
+  height: 46px;
+  border: 2px dashed #c9c3f0;
+  border-radius: 10px;
+}
+
+.card:first-child {
+  transform: rotate(-6deg);
+}
+
+.card:last-child {
+  transform: rotate(5deg);
+}
+
+.title {
+  margin: 18px 0 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.text {
+  max-width: 420px;
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+@keyframes bounce {
+  50% {
+    transform: translateY(-8px);
+  }
+}

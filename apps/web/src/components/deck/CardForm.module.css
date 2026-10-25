@@ -1,0 +1,42 @@
+.form {
+  padding: 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+}
+
+.title {
+  margin: 0 0 14px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: start;
+  gap: 14px;
+}
+
+.en {
+  font-family: var(--font-en);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+/* Кнопка на уровне полей, а не подписей над ними */
+.submit {
+  height: 50px;
+  margin-top: 27px;
+}
+
+@media (max-width: 720px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .submit {
+    width: 100%;
+    margin-top: 4px;
+  }
+}

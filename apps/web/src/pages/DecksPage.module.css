@@ -1,0 +1,158 @@
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 16px 64px;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+  animation: rise 0.5s ease-out both;
+}
+
+.title {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.stats {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+}
+
+.newButton {
+  margin-top: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 22px;
+}
+
+/* Иллюстрация справа от заголовка */
+.art {
+  position: relative;
+  width: 280px;
+  height: 170px;
+  flex-shrink: 0;
+}
+
+.ring {
+  position: absolute;
+  left: 50px;
+  top: 0;
+  width: 170px;
+  height: 170px;
+  border: 2px dashed #c9c3f0;
+  border-radius: 50%;
+  animation: spin 30s linear infinite;
+}
+
+.artCard {
+  position: absolute;
+  padding: 18px 26px;
+  border-radius: 16px;
+  font-size: 22px;
+  font-weight: 600;
+  box-shadow: 0 14px 30px rgb(27 26 46 / 0.14);
+  animation: float 5s ease-in-out infinite;
+}
+
+.artEn {
+  left: 6px;
+  top: 28px;
+  --r: -7deg;
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-en);
+}
+
+.artRu {
+  right: 0;
+  bottom: 16px;
+  --r: 6deg;
+  background: var(--text);
+  color: #fff;
+  font-size: 18px;
+  animation-delay: -2.5s;
+}
+
+.artStar {
+  position: absolute;
+  right: 40px;
+  top: 6px;
+  color: #c98a00;
+  animation: twinkle 2.4s ease-in-out infinite;
+}
+
+/* Скелетон загрузки */
+.skeletonCard {
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+}
+
+.skeletonBody {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 18px 18px;
+}
+
+@media (max-width: 760px) {
+  .art {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .main {
+    padding-top: 28px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: rotate(var(--r)) translateY(0);
+  }
+  50% {
+    transform: rotate(var(--r)) translateY(-10px);
+  }
+}
+
+@keyframes twinkle {
+  50% {
+    opacity: 0.3;
+    transform: scale(0.7);
+  }
+}

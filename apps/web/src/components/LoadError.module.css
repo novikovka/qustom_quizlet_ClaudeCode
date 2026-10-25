@@ -1,0 +1,33 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 36px 28px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+}
+
+.icon {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.title {
+  margin: 18px 0 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.text {
+  margin: 8px 0 22px;
+  color: var(--muted);
+}
