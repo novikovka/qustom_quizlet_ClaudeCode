@@ -36,6 +36,45 @@
   gap: 22px;
 }
 
+/* Телефон: список колод и плавающая квадратная кнопка «+» */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fab {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 40;
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 18px;
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 12px 28px rgb(79 70 229 / 0.4);
+  cursor: pointer;
+  animation: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.fab:active {
+  transform: scale(0.95);
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+}
+
 /* Иллюстрация справа от заголовка */
 .art {
   position: relative;
@@ -116,6 +155,15 @@
 @media (max-width: 600px) {
   .main {
     padding-top: 28px;
+  }
+
+  /* Место под плавающей кнопкой, чтобы она не закрывала последнюю колоду */
+  .main {
+    padding-bottom: 110px;
+  }
+
+  .hero {
+    margin-bottom: 20px;
   }
 
   .title {

@@ -7,7 +7,9 @@ import { Button } from '../components/Button';
 import { PlusIcon, StarIcon } from '../components/icons';
 import { Skeleton } from '../components/Skeleton';
 import { LoadError } from '../components/LoadError';
+import { MOBILE, useMediaQuery } from '../lib/useMediaQuery';
 import { DeckCard } from '../components/decks/DeckCard';
+import { DeckRow } from '../components/decks/DeckRow';
 import { EmptyDecks } from '../components/decks/EmptyDecks';
 import { NewDeckModal } from '../components/decks/NewDeckModal';
 import { RenameDeckModal } from '../components/decks/RenameDeckModal';
@@ -28,6 +30,7 @@ export function DecksPage() {
   const [dialog, setDialog] = useState<Dialog>(null);
   const navigate = useNavigate();
   const toast = useToast();
+  const mobile = useMediaQuery(MOBILE);
 
   const fetchDecks = useCallback(
     () =>
@@ -86,25 +89,52 @@ export function DecksPage() {
               <p className={styles.stats}>
                 {decksText(decks.length)} · {cardsText(totalCards)}
               </p>
-              <Button className={styles.newButton} onClick={() => setDialog({ type: 'new' })}>
-                <PlusIcon size={18} />
-                Новая колода
-              </Button>
+              {!mobile && (
+                <Button className={styles.newButton} onClick={() => setDialog({ type: 'new' })}>
+                  <PlusIcon size={18} />
+                  Новая колода
+                </Button>
+              )}
             </div>
             <HeroArt />
           </section>
 
-          <div className={styles.grid}>
-            {decks.map((deck, i) => (
-              <DeckCard
-                key={deck.id}
-                deck={deck}
-                index={i}
-                onRename={() => setDialog({ type: 'rename', deck })}
-                onDelete={() => setDialog({ type: 'delete', deck })}
-              />
-            ))}
-          </div>
+          {mobile ? (
+            // Телефон: колоды списком и плавающая кнопка «+» (DESIGN.md, экран 11)
+            <>
+              <ul className={styles.list}>
+                {decks.map((deck, i) => (
+                  <DeckRow
+                    key={deck.id}
+                    deck={deck}
+                    index={i}
+                    onRename={() => setDialog({ type: 'rename', deck })}
+                    onDelete={() => setDialog({ type: 'delete', deck })}
+                  />
+                ))}
+              </ul>
+              <button
+                type="button"
+                className={styles.fab}
+                aria-label="Новая колода"
+                onClick={() => setDialog({ type: 'new' })}
+              >
+                <PlusIcon size={26} />
+              </button>
+            </>
+          ) : (
+            <div className={styles.grid}>
+              {decks.map((deck, i) => (
+                <DeckCard
+                  key={deck.id}
+                  deck={deck}
+                  index={i}
+                  onRename={() => setDialog({ type: 'rename', deck })}
+                  onDelete={() => setDialog({ type: 'delete', deck })}
+                />
+              ))}
+            </div>
+          )}
         </>
       )}
 

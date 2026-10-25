@@ -31,3 +31,41 @@
   margin: 8px 0 22px;
   color: var(--muted);
 }
+
+/* Иллюстрация «нет связи» */
+.art {
+  width: 220px;
+  height: 90px;
+}
+
+.wire,
+.prong,
+.socketHole {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.plug {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+
+.socket {
+  fill: var(--danger-soft);
+  stroke: var(--danger);
+  stroke-width: 3;
+}
+
+.spark {
+  fill: #c98a00;
+  animation: blink 1.2s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.15;
+  }
+}

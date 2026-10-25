@@ -54,6 +54,24 @@ export const ChevronLeftIcon = (p: P) => (
   </Icon>
 );
 
+export const ChevronRightIcon = (p: P) => (
+  <Icon {...p}>
+    <path d="m9 18 6-6-6-6" />
+  </Icon>
+);
+
+export const MoreIcon = (p: P) => (
+  <Icon {...p}>
+    <path d="M5 12h.01M12 12h.01M19 12h.01" strokeWidth="3" />
+  </Icon>
+);
+
+export const ShuffleIcon = (p: P) => (
+  <Icon {...p}>
+    <path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
+  </Icon>
+);
+
 export const CheckIcon = (p: P) => (
   <Icon {...p}>
     <path d="M20 6 9 17l-5-5" />

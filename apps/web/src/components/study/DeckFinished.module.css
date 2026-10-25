@@ -1,0 +1,166 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 0 40px;
+  text-align: center;
+  animation: rise 0.5s ease-out both;
+}
+
+/* Конфетти падает сверху через весь экран */
+.confetti {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.piece {
+  position: absolute;
+  top: -20px;
+  width: 9px;
+  height: 14px;
+  border-radius: 2px;
+  opacity: 0;
+  animation: fall linear 1 forwards;
+}
+
+.round {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* Стопка цветных карточек, на верхней рисуется галочка */
+.art {
+  position: relative;
+  width: 160px;
+  height: 150px;
+}
+
+.stack,
+.top {
+  position: absolute;
+  left: 30px;
+  width: 100px;
+  height: 128px;
+  border-radius: 18px;
+  box-shadow: 0 12px 26px rgb(27 26 46 / 0.1);
+}
+
+.stack:nth-child(1) {
+  top: 18px;
+  transform: rotate(-12deg) translateX(-14px);
+}
+
+.stack:nth-child(2) {
+  top: 12px;
+  transform: rotate(8deg) translateX(14px);
+}
+
+.top {
+  top: 4px;
+  display: grid;
+  place-items: center;
+  background: var(--surface);
+  border: 2px solid #d6f3e8;
+  animation: pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.check {
+  width: 64px;
+  height: 64px;
+  fill: none;
+  stroke: var(--success);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: draw 0.6s ease-out 0.35s forwards;
+}
+
+.title {
+  margin: 26px 0 0;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.title:focus {
+  outline: none;
+}
+
+.text {
+  max-width: 480px;
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+  overflow-wrap: anywhere;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 10px;
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--accent-ink);
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 30px;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-self: stretch;
+  }
+}
+
+@keyframes fall {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(110vh) rotate(var(--rotate));
+  }
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}

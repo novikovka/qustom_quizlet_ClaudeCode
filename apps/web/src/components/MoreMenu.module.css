@@ -1,0 +1,54 @@
+.root {
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 30;
+  min-width: 180px;
+  padding: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgb(27 26 46 / 0.16);
+  animation: menu-in 0.18s ease-out;
+}
+
+.item {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.item:hover,
+.item:focus-visible {
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  outline: none;
+}
+
+.danger {
+  color: var(--danger-ink);
+}
+
+.danger:hover,
+.danger:focus-visible {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}

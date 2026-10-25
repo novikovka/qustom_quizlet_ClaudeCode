@@ -13,6 +13,8 @@ import { LoadError } from '../components/LoadError';
 import { RenameDeckModal } from '../components/decks/RenameDeckModal';
 import { CardForm } from '../components/deck/CardForm';
 import { CardTable } from '../components/deck/CardTable';
+import { CardList } from '../components/deck/CardList';
+import { MOBILE, useMediaQuery } from '../lib/useMediaQuery';
 import { EmptyCards } from '../components/deck/EmptyCards';
 import styles from './DeckPage.module.css';
 
@@ -32,6 +34,8 @@ export function DeckPage() {
   const [renaming, setRenaming] = useState(false);
   const [highlightId, setHighlightId] = useState<number | null>(null);
   const toast = useToast();
+  const mobile = useMediaQuery(MOBILE);
+  const ready = load.status === 'ready';
 
   const fetchDeck = useCallback(
     () =>
@@ -107,11 +111,19 @@ export function DeckPage() {
   }
 
   return (
-    <main className={styles.main}>
-      <Link to="/" className={styles.back}>
-        <ChevronLeftIcon size={18} />
-        Все колоды
-      </Link>
+    <main className={`${styles.main} ${mobile && ready ? styles.withBottomBar : ''}`}>
+      {/* На телефоне — компактная шапка «‹ Колоды» с карандашом (DESIGN.md, экран 12) */}
+      <div className={styles.topBar}>
+        <Link to="/" className={styles.back}>
+          <ChevronLeftIcon size={18} />
+          {mobile ? 'Колоды' : 'Все колоды'}
+        </Link>
+        {mobile && ready && (
+          <IconButton aria-label="Переименовать колоду" onClick={() => setRenaming(true)}>
+            <PencilIcon />
+          </IconButton>
+        )}
+      </div>
 
       {load.status === 'loading' && <DeckSkeleton />}
 
@@ -145,43 +157,49 @@ export function DeckPage() {
               <span className={styles.label}>Колода</span>
               <div className={styles.nameRow}>
                 <h1 className={styles.name}>{load.deck.name}</h1>
-                <IconButton
-                  aria-label="Переименовать колоду"
-                  className={styles.renameButton}
-                  onClick={() => setRenaming(true)}
-                >
-                  <PencilIcon />
-                </IconButton>
+                {!mobile && (
+                  <IconButton
+                    aria-label="Переименовать колоду"
+                    className={styles.renameButton}
+                    onClick={() => setRenaming(true)}
+                  >
+                    <PencilIcon />
+                  </IconButton>
+                )}
               </div>
               <p className={styles.count}>{cardsText(load.deck.cardCount)}</p>
             </div>
-            {load.deck.cardCount > 0 ? (
-              <Link to={`/decks/${deckId}/study`} className={buttonClass()}>
-                <PlayIcon size={16} />
-                Листать карточки
-              </Link>
-            ) : (
-              <Button disabled className={styles.studyDisabled}>
-                <PlayIcon size={16} />
-                Листать — нужна хотя бы 1 карточка
-              </Button>
-            )}
+            {!mobile && <StudyButton deckId={deckId} cardCount={load.deck.cardCount} />}
           </section>
 
           <CardForm onAdd={addCard} />
 
           <section className={styles.list} aria-label="Карточки колоды">
-            {load.deck.cards.length > 0 ? (
-              <CardTable
+            {load.deck.cards.length === 0 ? (
+              <EmptyCards />
+            ) : mobile ? (
+              <CardList
                 cards={load.deck.cards}
                 highlightId={highlightId}
                 onSave={saveCard}
                 onDelete={deleteCard}
               />
             ) : (
-              <EmptyCards />
+              <CardTable
+                cards={load.deck.cards}
+                highlightId={highlightId}
+                onSave={saveCard}
+                onDelete={deleteCard}
+              />
             )}
           </section>
+
+          {/* Телефон: кнопка «Листать» закреплена внизу экрана */}
+          {mobile && (
+            <div className={styles.bottomBar}>
+              <StudyButton deckId={deckId} cardCount={load.deck.cardCount} fullWidth />
+            </div>
+          )}
 
           {renaming && (
             <RenameDeckModal
@@ -197,6 +215,32 @@ export function DeckPage() {
         </>
       )}
     </main>
+  );
+}
+
+// «▶ Листать карточки»; в пустой колоде — неактивная кнопка с объяснением
+function StudyButton({
+  deckId,
+  cardCount,
+  fullWidth,
+}: {
+  deckId: number;
+  cardCount: number;
+  fullWidth?: boolean;
+}) {
+  if (cardCount === 0) {
+    return (
+      <Button disabled fullWidth={fullWidth} className={styles.studyDisabled}>
+        <PlayIcon size={16} />
+        Листать — нужна хотя бы 1 карточка
+      </Button>
+    );
+  }
+  return (
+    <Link to={`/decks/${deckId}/study`} className={buttonClass({ fullWidth })}>
+      <PlayIcon size={16} />
+      Листать карточки
+    </Link>
   );
 }
 

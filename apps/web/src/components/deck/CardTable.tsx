@@ -1,5 +1,6 @@
-import { useState, type KeyboardEvent } from 'react';
+import { useState } from 'react';
 import type { Card } from '../../api/decks';
+import { useCardEditor } from './useCardEditor';
 import { deckColorVars } from '../../lib/deckColors';
 import { Button, IconButton } from '../Button';
 import { PencilIcon, TrashIcon } from '../icons';
@@ -95,32 +96,13 @@ type EditRowProps = {
 
 // Строка в режиме редактирования: Enter сохраняет, Esc отменяет
 function EditRow({ card, number, onCancel, onSave }: EditRowProps) {
-  const [en, setEn] = useState(card.en);
-  const [ru, setRu] = useState(card.ru);
-  const [saving, setSaving] = useState(false);
-  const [tried, setTried] = useState(false);
-
-  const enEmpty = tried && !en.trim();
-  const ruEmpty = tried && !ru.trim();
-
-  async function save() {
-    setTried(true);
-    if (!en.trim() || !ru.trim()) return;
-    // Ничего не поменялось — просто выходим из редактирования
-    if (en.trim() === card.en && ru.trim() === card.ru) return onCancel();
-    setSaving(true);
-    await onSave(en.trim(), ru.trim());
-    setSaving(false);
-  }
-
-  function onKeyDown(e: KeyboardEvent<HTMLInputElement>) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      save();
-    } else if (e.key === 'Escape') {
-      onCancel();
-    }
-  }
+  const { en, ru, setEn, setRu, saving, save, onKeyDown, enError, ruError } = useCardEditor(
+    card,
+    onSave,
+    onCancel,
+  );
+  const enEmpty = Boolean(enError);
+  const ruEmpty = Boolean(ruError);
 
   return (
     <tr className={styles.editing}>
@@ -139,7 +121,7 @@ function EditRow({ card, number, onCancel, onSave }: EditRowProps) {
           onKeyDown={onKeyDown}
           autoFocus
         />
-        {enEmpty && <span className={styles.error}>Введите слово</span>}
+        {enError && <span className={styles.error}>{enError}</span>}
       </td>
       <td>
         <input
@@ -151,7 +133,7 @@ function EditRow({ card, number, onCancel, onSave }: EditRowProps) {
           onChange={(e) => setRu(e.target.value)}
           onKeyDown={onKeyDown}
         />
-        {ruEmpty && <span className={styles.error}>Введите перевод</span>}
+        {ruError && <span className={styles.error}>{ruError}</span>}
       </td>
       <td className={styles.actions}>
         <Button size="small" loading={saving} onClick={save}>

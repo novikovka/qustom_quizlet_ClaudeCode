@@ -1,0 +1,344 @@
+.main {
+  position: relative;
+  min-height: calc(100vh - 65px);
+  padding: 24px 16px 48px;
+  overflow: hidden;
+}
+
+/* Фон: крупные полупрозрачные парящие круги */
+.bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bgCircle {
+  position: absolute;
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.bgCircle:nth-child(1) {
+  width: 380px;
+  height: 380px;
+  left: -140px;
+  top: 60px;
+  background: #6d5bd0;
+  opacity: 0.12;
+}
+
+.bgCircle:nth-child(2) {
+  width: 260px;
+  height: 260px;
+  right: -80px;
+  top: 30%;
+  background: #2f7fd8;
+  opacity: 0.12;
+  animation-delay: -2s;
+}
+
+.bgCircle:nth-child(3) {
+  width: 160px;
+  height: 160px;
+  left: 18%;
+  bottom: -40px;
+  background: #e5603d;
+  opacity: 0.15;
+  animation-delay: -4s;
+}
+
+.column {
+  position: relative;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  min-height: 44px;
+  color: var(--text);
+  font-size: 17px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.back:hover {
+  color: var(--accent-ink);
+}
+
+.backText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Переключатель-сегменты: активный белый с тенью */
+.segments {
+  display: flex;
+  padding: 4px;
+  border-radius: 14px;
+  background: #e7e5f3;
+}
+
+.segment {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+}
+
+.segment[aria-pressed='true'] {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 2px 8px rgb(27 26 46 / 0.12);
+}
+
+.shuffleIcon {
+  display: none;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 28px;
+}
+
+.counter {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.shuffledBadge {
+  padding: 3px 10px;
+  border-radius: 8px;
+  background: var(--warn-soft);
+  color: var(--warn-ink);
+  font-size: 12px;
+  font-weight: 700;
+  animation: spring 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Прогресс из полосок: пройденные — светлый акцент, текущая — акцент и шире */
+.progress {
+  display: flex;
+  gap: 4px;
+  margin: 10px 0 22px;
+}
+
+.progress > span {
+  height: 6px;
+  min-width: 2px;
+  flex: 1;
+  border-radius: 3px;
+  transition:
+    flex-grow 0.3s,
+    background 0.3s;
+}
+
+.pending {
+  background: #e3e1f0;
+}
+
+.done {
+  background: #c7c3f7;
+}
+
+.current {
+  flex-grow: 3 !important;
+  background: var(--accent);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 26px;
+}
+
+.round {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow:
+    inset 0 0 0 1.5px #d9d6ea,
+    0 6px 14px rgb(27 26 46 / 0.06);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.round:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.round:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.round:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.flipButton {
+  height: 56px;
+  padding: 0 34px;
+  border-radius: 999px;
+}
+
+.finish {
+  height: 56px;
+  border-radius: 999px;
+}
+
+.keys {
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+.keys kbd {
+  display: inline-block;
+  min-width: 28px;
+  margin: 0 2px;
+  padding: 2px 8px;
+  border: 1px solid #d9d6ea;
+  border-bottom-width: 2px;
+  border-radius: 7px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.message {
+  position: relative;
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 36px 28px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+}
+
+.messageTitle {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.messageText {
+  margin: 8px 0 22px;
+  color: var(--muted);
+}
+
+/* Телефон (DESIGN.md, экран 13) */
+@media (max-width: 600px) {
+  .main {
+    padding-top: 12px;
+  }
+
+  .top {
+    flex-wrap: wrap;
+  }
+
+  .back {
+    flex: 1;
+  }
+
+  /* «Перемешать» — иконкой в шапке, сегменты — на всю ширину строкой ниже */
+  .shuffleText {
+    display: none;
+  }
+
+  .shuffleIcon {
+    display: inline-grid;
+  }
+
+  .controls {
+    order: 3;
+    width: 100%;
+  }
+
+  .segments {
+    flex: 1;
+  }
+
+  .segment {
+    flex: 1;
+    min-height: 40px;
+  }
+
+  /* Счётчик справа от полоски прогресса */
+  .status {
+    float: right;
+    margin-left: 12px;
+  }
+
+  .progress {
+    margin: 11px 0 18px;
+  }
+
+  .flipButton {
+    flex: 1;
+    padding: 0 16px;
+  }
+
+  .keys {
+    display: none;
+  }
+}
+
+@keyframes float {
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes spring {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+}

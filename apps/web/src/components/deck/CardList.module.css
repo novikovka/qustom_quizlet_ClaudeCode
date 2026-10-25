@@ -1,0 +1,99 @@
+.list {
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 6px 10px 16px;
+  border-bottom: 1px solid #efedf7;
+}
+
+.item:last-child {
+  border-bottom: 0;
+}
+
+.texts {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.en {
+  font-family: var(--font-en);
+  font-size: 17px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.ru {
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+/* Новая карточка подсвечивается и гаснет */
+.fresh {
+  animation: highlight 2.4s ease-out;
+}
+
+.editing {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  padding: 14px 16px;
+  background: #faf9ff;
+}
+
+.input {
+  width: 100%;
+  height: 46px;
+  padding: 0 12px;
+  border: 1.5px solid #d9d6ea;
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 0.5px var(--accent),
+    0 0 0 4px var(--focus-ring);
+}
+
+.inputEn {
+  font-family: var(--font-en);
+  font-weight: 600;
+}
+
+.invalid {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+}
+
+.error {
+  margin-top: -4px;
+  color: var(--danger-ink);
+  font-size: 13px;
+}
+
+.editActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+@keyframes highlight {
+  from {
+    background: #e2e0ff;
+  }
+}
