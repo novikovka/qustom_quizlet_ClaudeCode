@@ -1,2 +1,2 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Все текстовые файлы хранятся и выкладываются с LF — так ждёт Prettier
+* text=auto eol=lf
