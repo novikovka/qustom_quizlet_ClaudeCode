@@ -1,0 +1,67 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.input {
+  height: 50px;
+  padding: 0 16px;
+  border: 1.5px solid #d9d6ea;
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 16px;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.input::placeholder {
+  color: #9a98b0;
+}
+
+/* Рамка 2px без сдвига содержимого: вторые 0.5px дорисовывает тень */
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 0.5px var(--accent),
+    0 0 0 4px var(--focus-ring);
+}
+
+.invalid {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+}
+
+.invalid:focus {
+  border-color: var(--danger);
+  box-shadow:
+    0 0 0 0.5px var(--danger),
+    0 0 0 4px #fde0da;
+}
+
+.error,
+.hint {
+  margin: 0;
+  font-size: 13px;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--danger-ink);
+  font-weight: 500;
+}
+
+.hint {
+  color: var(--muted);
+}

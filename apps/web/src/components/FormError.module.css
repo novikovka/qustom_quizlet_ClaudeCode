@@ -1,0 +1,12 @@
+.box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--danger);
+  border-radius: 14px;
+  background: var(--danger-soft);
+  color: var(--danger-ink);
+  font-size: 14px;
+  font-weight: 500;
+}
